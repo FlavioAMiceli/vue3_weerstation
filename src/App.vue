@@ -24,7 +24,9 @@
       </div>
 
       <!-- Weather divs -->
-      <WeatherStations/>
+      <div>
+        <WeatherStations/>
+      </div>
 
     </div>
 
@@ -37,7 +39,6 @@ import WeatherStations from './components/WeatherStations.vue';
 
 export default defineComponent({
 
-  name: 'App',
   components: {
     WeatherStations
   },
@@ -74,7 +75,7 @@ export default defineComponent({
     margin-right: 50px;
     padding: 20px;
     border-radius: 5px;
-    border: 1px solid #DFE3E8
+    border: 1px solid #EFEFEF
   }
 
   .text-converter_user-input {
@@ -86,8 +87,6 @@ export default defineComponent({
     margin: 0;
   }
 
-/* /Dialogic/Formats/Markdown/Typora theme/dialogic.css */
-
   * {
     padding: 0px;
     margin: 0px;
@@ -96,29 +95,6 @@ export default defineComponent({
   body {
     font-family: verdana;
     font-size: 9pt;
-  }
-
-  p, li {
-    color: rgb(77, 77, 77);
-  }
-
-  p {
-    text-align: justify;
-    margin-bottom: 8pt;
-    line-height: 1.4em;
-  }
-
-  li > p {
-    margin-bottom: 0pt;
-  }
-
-  p + ul {
-    margin-bottom: 0;
-  }
-
-  li {
-    margin-left: 1cm;
-    margin-bottom: 4pt;
   }
 
   h1 {
@@ -147,96 +123,6 @@ export default defineComponent({
     color:  rgb(0,55,100);
     font-weight: normal;
     break-after: avoid;
-  }
-
-  h4 {
-    font-size:  9pt;
-    font-weight: bold;
-    font-style: italic;
-    color: rgb(77, 77, 77);
-    line-height:  1.4em;
-    margin-top: 12pt;
-    break-after: avoid;
-  }
-
-  h5 {
-    font-size:  9pt;
-    font-weight: normal;
-    font-style: italic;
-    color: rgb(77, 77, 77);
-    line-height:  1.4em;
-    margin-top: 12pt;
-    break-after: avoid;
-  }
-
-  a, a:visited {
-    color:  rgb(77, 77, 77);
-  }
-
-  table {
-    margin-top: 4pt;
-    margin-bottom: 8pt;
-  }
-
-  table th {
-    color:  white;
-    background-color: rgb(0,55,100);
-    font-weight:  bold;
-    font-size: 9pt;
-    padding: 4pt;
-    -webkit-print-color-adjust: exact; 
-  }
-
-  table td {
-    font-size:  9pt;
-    color:  rgb(77,77,77);
-    padding: 4pt;
-  }
-
-  table tr:nth-child(2n) td {
-    background-color: #EFEFEF;
-  }
-
-  code, pre {
-    margin-bottom: 8pt;
-    margin-top: 8pt;
-    color:  rgb(77, 77, 77);
-    font-size: 9pt;
-    font-family: consolas, sans-serif;
-    
-  }
-
-  hr {
-    border: none;
-    border-top: solid 1px rgb(77,77,77);
-    margin-bottom: 8pt;
-  }
-
-  blockquote {
-    margin-top: 0.5cm;
-    margin-bottom: 0.5cm;
-    padding: 0.5cm;
-    padding-top: 8pt;
-    padding-bottom: 1pt;
-    background-color: rgba(0,0,0,0.1);
-  }
-
-  ul {
-    margin-top: 2pt;
-  }
-
-  img {
-    max-width: 100%;
-    object-fit: cover;
-  }
-
-  @media print {
-    #write {
-      counter-reset: h1-counter 0 h2-counter 0 h3-counter 0;
-      padding-left: 5.5cm;
-      padding-bottom: 3cm;
-      padding-right:  5.8cm;
-    }
   }
 
 </style>

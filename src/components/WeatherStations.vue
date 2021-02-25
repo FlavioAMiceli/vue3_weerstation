@@ -1,10 +1,20 @@
 <template>
   <div>
 
-    <h2>weather stuff</h2>
-    {{ this.weather }}
+      <div class="weather-wrapper">
 
-    <div class="weather-sources">Source: <a href="https://www.buienradar.nl">buienradar.nl</a></div>
+        <h2>weather stuff</h2>
+        <div class="weather-stations_wrapper">
+          <div class="weather-stations_station" v-for="(station, index) in stations" :key="index">
+            <h3>{{ station.regio }}</h3>
+            
+            temperatuur: {{ station.temperature }}
+          </div>
+        </div>
+
+        <div class="weather-sources">Aknowledgements: <a href="https://www.buienradar.nl">buienradar.nl</a></div>
+
+    </div>
 
   </div>
 </template>
@@ -12,28 +22,43 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-export default defineComponent({
+declare interface WeatherStation {
 
-  name: 'WeatherStationsComponent',
+  weatherdescription: string;
+  regio: string;
+
+  winddirection: number;
+  airpressure: number;
+  temperature: number;
+  groundtemperature: number;
+  feeltemperature: number;
+  windspeed: number;
+  windspeedBft: number;
+  humidity: number;
+  precipitation: number;
+  sunpower: number;
+  rainFallLast24Hour: number;
+  rainFallLastHour: number;
+  winddirectiondegrees: number;
+
+}
+
+export default defineComponent({
 
   data() {
     return {
-      weather: ''
+      stations: [] as WeatherStation[],
     }
   },
 
-//   computed: {
-//     base64encoded(): string {
-//       return window.btoa(this.textFieldInput);
-//     }
-//   },
-
   methods: {
-    fetchWeatherData() {
-        fetch('https://data.buienradar.nl/2.0/feed/json')
-        .then(response => response.json())
-        .then(data => this.weather = data);
+    async fetchWeatherData() {
 
+      const res = await fetch('https://data.buienradar.nl/2.0/feed/json');
+      const json = await res.json();
+
+      this.stations = json.actual.stationmeasurements;
+      // this.stations = JSON.parse(json).actual.stationmeasurements;
     }
   },
 
@@ -46,7 +71,24 @@ export default defineComponent({
 
 <style>
 
-/* /Dialogic/Formats/Markdown/Typora theme/dialogic.css */
+  .weather-wrapper {
+      /* display: flex;
+      flex-direction: column; */
+      margin-right: 50px;
+      padding: 20px;
+      border-radius: 5px;
+      border: 1px solid #EFEFEF
+  }
+
+  .weather-stations_wrapper {
+    margin: 5px;
+  }
+
+  .weather-stations_station {
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #4D4D4D
+  }
 
   * {
     padding: 0px;
@@ -56,29 +98,6 @@ export default defineComponent({
   body {
     font-family: verdana;
     font-size: 9pt;
-  }
-
-  p, li {
-    color: rgb(77, 77, 77);
-  }
-
-  p {
-    text-align: justify;
-    margin-bottom: 8pt;
-    line-height: 1.4em;
-  }
-
-  li > p {
-    margin-bottom: 0pt;
-  }
-
-  p + ul {
-    margin-bottom: 0;
-  }
-
-  li {
-    margin-left: 1cm;
-    margin-bottom: 4pt;
   }
 
   h1 {
@@ -109,94 +128,8 @@ export default defineComponent({
     break-after: avoid;
   }
 
-  h4 {
-    font-size:  9pt;
-    font-weight: bold;
-    font-style: italic;
-    color: rgb(77, 77, 77);
-    line-height:  1.4em;
-    margin-top: 12pt;
-    break-after: avoid;
-  }
-
-  h5 {
-    font-size:  9pt;
-    font-weight: normal;
-    font-style: italic;
-    color: rgb(77, 77, 77);
-    line-height:  1.4em;
-    margin-top: 12pt;
-    break-after: avoid;
-  }
-
   a, a:visited {
     color:  rgb(77, 77, 77);
-  }
-
-  table {
-    margin-top: 4pt;
-    margin-bottom: 8pt;
-  }
-
-  table th {
-    color:  white;
-    background-color: rgb(0,55,100);
-    font-weight:  bold;
-    font-size: 9pt;
-    padding: 4pt;
-    -webkit-print-color-adjust: exact; 
-  }
-
-  table td {
-    font-size:  9pt;
-    color:  rgb(77,77,77);
-    padding: 4pt;
-  }
-
-  table tr:nth-child(2n) td {
-    background-color: #EFEFEF;
-  }
-
-  code, pre {
-    margin-bottom: 8pt;
-    margin-top: 8pt;
-    color:  rgb(77, 77, 77);
-    font-size: 9pt;
-    font-family: consolas, sans-serif;
-    
-  }
-
-  hr {
-    border: none;
-    border-top: solid 1px rgb(77,77,77);
-    margin-bottom: 8pt;
-  }
-
-  blockquote {
-    margin-top: 0.5cm;
-    margin-bottom: 0.5cm;
-    padding: 0.5cm;
-    padding-top: 8pt;
-    padding-bottom: 1pt;
-    background-color: rgba(0,0,0,0.1);
-  }
-
-  ul {
-    margin-top: 2pt;
-  }
-
-  img {
-    max-width: 100%;
-    object-fit: cover;
-  }
-
-  @media print {
-    #write {
-      counter-reset: h1-counter 0 h2-counter 0 h3-counter 0;
-      padding-left: 5.5cm;
-      padding-bottom: 3cm;
-      padding-right:  5.8cm;
-    }
   }
 
 </style>
