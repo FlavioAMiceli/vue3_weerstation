@@ -4,6 +4,8 @@
     <h2>weather stuff</h2>
     {{ this.weather }}
 
+    <div class="weather-sources">Source: <a href="https://www.buienradar.nl">buienradar.nl</a></div>
+
   </div>
 </template>
 
@@ -12,7 +14,7 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
 
-  name: 'App',
+  name: 'WeatherStationsComponent',
 
   data() {
     return {
@@ -27,13 +29,16 @@ export default defineComponent({
 //   },
 
   methods: {
-    loadWeatherData() {
-      this.weather = "nice";
+    fetchWeatherData() {
+        fetch('https://data.buienradar.nl/2.0/feed/json')
+        .then(response => response.json())
+        .then(data => this.weather = data);
+
     }
   },
 
   mounted() {
-    this.loadWeatherData();
+    this.fetchWeatherData();
   }
 
 });
