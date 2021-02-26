@@ -18,7 +18,7 @@
         <!-- TODO: -->
         <!-- Submit button. CSS. Button to toggle live encoding (and grey out submit button)? -->
         <div class="text-converter_output">
-          {{ this.base64encoded }}
+          {{ base64encoded }}
         </div>
 
       </div>
@@ -63,10 +63,9 @@ export default defineComponent({
 <style>
 
   .text-weather_wrapper {
-    display: grid;
-    grid-template-columns: 1 fr 2 fr;
     width: 100%;
     padding: 50px 5%;
+    box-sizing: border-box;
   }
 
   .text-converter {

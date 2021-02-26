@@ -21,27 +21,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { WeatherStation } from '../model/station';
 
-declare interface WeatherStation {
-
-  weatherdescription: string;
-  regio: string;
-
-  winddirection: number;
-  airpressure: number;
-  temperature: number;
-  groundtemperature: number;
-  feeltemperature: number;
-  windspeed: number;
-  windspeedBft: number;
-  humidity: number;
-  precipitation: number;
-  sunpower: number;
-  rainFallLast24Hour: number;
-  rainFallLastHour: number;
-  winddirectiondegrees: number;
-
-}
 
 export default defineComponent({
 
@@ -52,7 +33,7 @@ export default defineComponent({
   },
 
   methods: {
-    async fetchWeatherData() {
+    async fetchWeatherData(): Promise<void> {
 
       const res = await fetch('https://data.buienradar.nl/2.0/feed/json');
       const json = await res.json();
